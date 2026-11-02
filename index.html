@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>$SNOWBALL Mint · BNB Smart Chain — TEST VERSION</title>
+<title>$SNOWBALL Mint · BNB Smart Chain</title>
 <style>
   :root{
     --bg:#070b14; --panel:#0d1424; --panel2:#111b31; --line:#1d2b47;
@@ -14,7 +14,7 @@
   body{margin:0;background:radial-gradient(1000px 500px at 70% -10%,#12233f 0%,var(--bg) 55%);color:var(--text);
        font:15px/1.55 -apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"PingFang SC","Microsoft YaHei",sans-serif}
   a{color:var(--accent)}
-  .testbar{background:repeating-linear-gradient(45deg,#7c2d12,#7c2d12 16px,#9a3412 16px,#9a3412 32px);
+  .prebar{background:linear-gradient(90deg,#0c4a6e,#0369a1,#0c4a6e);
            color:#fff;text-align:center;font-weight:700;letter-spacing:.12em;padding:8px 12px;font-size:13px}
   header{display:flex;justify-content:space-between;align-items:center;padding:16px 22px;border-bottom:1px solid var(--line)}
   .logo{font-weight:800;font-size:19px;letter-spacing:.02em}
@@ -56,7 +56,7 @@
 </style>
 </head>
 <body>
-<div class="testbar">⚠ TEST VERSION — BSC TESTNET PREVIEW · NOT THE MAINNET LAUNCH · DO NOT SEND MAINNET FUNDS ⚠</div>
+<div class="prebar">❄ COMING SOON · 尚未开盘 — MAINNET LAUNCH IN PREPARATION · MINTING OPENS AT LAUNCH · DO NOT SEND FUNDS TO ANY ADDRESS UNTIL THE OFFICIAL ANNOUNCEMENT ❄</div>
 
 <header>
   <div class="logo"><span class="ball"></span>$SNOWBALL <span style="color:var(--dim);font-weight:600">Mint</span>
@@ -95,9 +95,10 @@
       <input id="shares" type="number" min="1" max="10" value="1">
       <div class="row" style="margin-top:10px"><span>Your minted / quota</span><b id="quotaNow">connect + enter handle</b></div>
       <div class="row"><span>Total cost</span><b id="costNow">—</b></div>
-      <button class="mintbtn" id="mintBtn" disabled>Mint (test preview)</button>
-      <p class="note" id="statusLine">Static preview: contract not wired yet (testnet deploy pending funding).
-         When wired, this page reads the live tier, price and your quota from SnowballMint.</p>
+      <button class="mintbtn" id="mintBtn" disabled>Mint — opens at launch</button>
+      <p class="note" id="statusLine">Pre-launch: the mainnet contracts are not deployed yet, so this page
+         shows launch-state values. Once deployed and wired, it reads the live tier, price and
+         your quota from SnowballMint.</p>
     </section>
 
     <!-- Leaderboard placeholder -->
@@ -130,28 +131,33 @@
       <thead><tr><th>Tier</th><th>Shares</th><th>Price / share</th><th></th></tr></thead>
       <tbody id="tierBody"></tbody>
     </table>
-    <p class="note">After share 10,000 the pool is open; per-share token allocation in this v1 test
-       stays fixed at 500,000 SNOWBALL (live design may float it with pool price).</p>
+    <p class="note">After share 10,000 the pool is open; the per-share token allocation in v1
+       stays fixed at 500,000 SNOWBALL (a future version may float it with pool price).</p>
   </section>
 </main>
 
 <footer>
-  $SNOWBALL — TEST VERSION. Contracts are unaudited test builds: fixed 500,000/share allocation,
-  operator-credited task quota, placeholder card grading. Mainnet launch requires audit + Olivia's
-  explicit deployment approval.<br>
-  <span class="mono" id="addrLine">contracts: not deployed yet (see snowball/README.md)</span>
+  $SNOWBALL — pre-launch. Contracts are unaudited: fixed 500,000/share allocation,
+  operator-credited task quota, placeholder card grading. Deployment happens only with the
+  project owner's explicit approval, announced here and on the official channels.<br>
+  <span class="mono" id="addrLine">contracts: not deployed yet — official addresses will appear here at launch</span>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
 <script>
-/* ===== Config: paste BSC-testnet addresses after running scripts/deploy-testnet.js ===== */
+/* ===== Config: BSC MAINNET. Paste the three contract addresses from
+   deployments/mainnet/addresses.json after running scripts/deploy-mainnet.js.
+   Until then mint/token/card stay empty and the page runs in pre-launch
+   static mode (no minting possible). ===== */
 const CONFIG = {
-  chainId: 97,
-  rpc: "https://data-seed-prebsc-1-s1.binance.org:8545",
-  mint: "",      // SnowballMint (testnet) — empty = static preview mode
-  token: "",     // SnowballToken (testnet)
-  card: "",      // SnowballCard (testnet)
-  registry: ""   // MockAgentRegistry (testnet)
+  chainId: 56,
+  rpc: "https://bsc-dataseed.binance.org",
+  mint: "",      // SnowballMint (mainnet) — fill from deployments/mainnet/addresses.json
+  token: "",     // SnowballToken (mainnet) — fill from deployments/mainnet/addresses.json
+  card: "",      // SnowballCard (mainnet) — fill from deployments/mainnet/addresses.json
+  registry: "0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F",  // .ai Agent ID registry (BSC mainnet)
+  pancakeRouter: "0x10ED43C718714eb63d5aA57B78B54704E256024E", // PancakeSwap V2 router
+  pancakeSwap: "https://pancakeswap.finance/swap"              // trading opens after the pool opens at 10,000 shares
 };
 const START_PRICE = 0.002, TOTAL_SHARES = 4440000, POOL_OPEN = 10000;
 const MINT_ABI = [
@@ -250,7 +256,7 @@ async function refreshQuota(){
 $("handle").addEventListener("change", refreshQuota);
 
 $("connectBtn").addEventListener("click", async () => {
-  if (!CONFIG.mint) { $("statusLine").textContent = "Static preview: no testnet contract wired yet — see README for deploy steps."; return; }
+  if (!CONFIG.mint) { $("statusLine").textContent = "Pre-launch: mainnet contracts are not deployed yet — minting opens at launch."; return; }
   if (!window.ethereum) { $("statusLine").textContent = "No wallet provider found in this browser."; return; }
   provider = new ethers.BrowserProvider(window.ethereum);
   signer = await provider.getSigner();
