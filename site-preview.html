@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>$SNOWBALL Mint · BNB Smart Chain — TEST VERSION</title>
+<style>
+  :root{
+    --bg:#070b14; --panel:#0d1424; --panel2:#111b31; --line:#1d2b47;
+    --text:#eaf2ff; --dim:#8fa3c4; --accent:#7dd3fc; --accent2:#38bdf8;
+    --gold:#fbbf24; --green:#34d399; --red:#f87171;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(1000px 500px at 70% -10%,#12233f 0%,var(--bg) 55%);color:var(--text);
+       font:15px/1.55 -apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"PingFang SC","Microsoft YaHei",sans-serif}
+  a{color:var(--accent)}
+  .testbar{background:repeating-linear-gradient(45deg,#7c2d12,#7c2d12 16px,#9a3412 16px,#9a3412 32px);
+           color:#fff;text-align:center;font-weight:700;letter-spacing:.12em;padding:8px 12px;font-size:13px}
+  header{display:flex;justify-content:space-between;align-items:center;padding:16px 22px;border-bottom:1px solid var(--line)}
+  .logo{font-weight:800;font-size:19px;letter-spacing:.02em}
+  .logo .ball{display:inline-block;width:22px;height:22px;border-radius:50%;vertical-align:-5px;margin-right:8px;
+    background:radial-gradient(circle at 35% 30%,#ffffff,#bae6fd 55%,#38bdf8);box-shadow:0 0 14px #38bdf866}
+  .badge{border:1px solid var(--line);border-radius:999px;padding:3px 10px;color:var(--dim);font-size:12px;margin-left:8px}
+  button{background:linear-gradient(180deg,var(--accent2),#0284c7);border:0;color:#fff;font-weight:700;
+         padding:10px 18px;border-radius:10px;cursor:pointer;font-size:14px}
+  button:disabled{opacity:.45;cursor:not-allowed}
+  button.ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
+  main{max-width:1060px;margin:0 auto;padding:28px 18px 60px}
+  .hero{text-align:center;padding:26px 0 8px}
+  .hero .kicker{color:var(--accent);letter-spacing:.28em;font-size:12px;font-weight:700}
+  .hero h1{font-size:42px;margin:10px 0 4px;letter-spacing:.01em}
+  .hero p{color:var(--dim);max-width:640px;margin:6px auto}
+  .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;margin-top:26px}
+  @media (max-width:820px){.grid{grid-template-columns:1fr}.hero h1{font-size:32px}}
+  .card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:16px;padding:20px}
+  .card h3{margin:0 0 12px;font-size:15px;letter-spacing:.06em;color:var(--dim);text-transform:uppercase}
+  .big{font-size:30px;font-weight:800}
+  .row{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px dashed #1c2a44}
+  .row:last-child{border-bottom:0}
+  .row span:first-child{color:var(--dim)}
+  .bar{height:12px;background:#0a101f;border:1px solid var(--line);border-radius:999px;overflow:hidden;margin:10px 0 4px}
+  .bar i{display:block;height:100%;background:linear-gradient(90deg,#38bdf8,#bae6fd);width:0%}
+  label{display:block;color:var(--dim);font-size:13px;margin:12px 0 5px}
+  input{width:100%;background:#0a101f;border:1px solid var(--line);border-radius:10px;color:var(--text);padding:11px 12px;font-size:15px}
+  .mintbtn{width:100%;margin-top:16px;padding:13px;font-size:16px}
+  .note{color:var(--dim);font-size:13px}
+  .gold{color:var(--gold)} .green{color:var(--green)} .red{color:var(--red)}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{padding:7px 8px;border-bottom:1px solid #182540;text-align:left}
+  th{color:var(--dim);font-weight:600}
+  .tabs{display:flex;gap:8px;margin-bottom:10px}
+  .tabs button{padding:6px 12px;font-size:13px}
+  .tabs button.off{background:transparent;border:1px solid var(--line)}
+  footer{color:var(--dim);text-align:center;padding:22px;font-size:13px;border-top:1px solid var(--line)}
+  .mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;word-break:break-all}
+</style>
+</head>
+<body>
+<div class="testbar">⚠ TEST VERSION — BSC TESTNET PREVIEW · NOT THE MAINNET LAUNCH · DO NOT SEND MAINNET FUNDS ⚠</div>
+
+<header>
+  <div class="logo"><span class="ball"></span>$SNOWBALL <span style="color:var(--dim);font-weight:600">Mint</span>
+    <span class="badge">BNB SMART CHAIN</span><span class="badge">AGENT ID ONLY</span></div>
+  <button id="connectBtn">Connect Binance Wallet</button>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="kicker">BUILD ON BINANCE · ONE AND ONLY</div>
+    <h1>$SNOWBALL — 雪球</h1>
+    <p>The snowball grows as it rolls. Agent ID is the only pass: tiered pricing rewards early
+       rollers, invites and tasks make everyone's ball bigger. Every share mints a graded
+       collector card + 500,000 $SNOWBALL. 80% of every payment seeds the PancakeSwap pool
+       that opens at 10,000 shares — LP burned.</p>
+    <p class="note">从第一片雪开始，滚出属于 Agent 的雪球。</p>
+  </section>
+
+  <div class="grid">
+    <!-- Preview / mint card -->
+    <section class="card">
+      <h3>$SNOWBALL · Mint Pass</h3>
+      <div class="row"><span>Current tier</span><b id="tierNow">Tier 1 · 0.002 BNB</b></div>
+      <div class="row"><span>Next serial</span><b id="serialNow">#1</b></div>
+      <div class="row"><span>You receive</span><b>A graded collector card + 500,000 $SNOWBALL / share</b></div>
+      <div class="row"><span>Shares minted</span><b><span id="soldNow">—</span> / 4,440,000</b></div>
+      <div class="bar"><i id="soldBar"></i></div>
+      <div class="row"><span>Pool progress (opens at 10,000)</span><b id="poolPct">—</b></div>
+      <div class="row"><span>Pool reserve (80%)</span><b id="reserveNow">—</b></div>
+
+      <label>Your Agent ID handle (without .ai)</label>
+      <input id="handle" placeholder="e.g. zhuxiao" autocomplete="off">
+      <label>Referrer handle (optional, +1 quota for them)</label>
+      <input id="referrer" placeholder="inviter's handle" autocomplete="off">
+      <label>Shares (base quota 10 / Agent ID)</label>
+      <input id="shares" type="number" min="1" max="10" value="1">
+      <div class="row" style="margin-top:10px"><span>Your minted / quota</span><b id="quotaNow">connect + enter handle</b></div>
+      <div class="row"><span>Total cost</span><b id="costNow">—</b></div>
+      <button class="mintbtn" id="mintBtn" disabled>Mint (test preview)</button>
+      <p class="note" id="statusLine">Static preview: contract not wired yet (testnet deploy pending funding).
+         When wired, this page reads the live tier, price and your quota from SnowballMint.</p>
+    </section>
+
+    <!-- Leaderboard placeholder -->
+    <section class="card">
+      <h3>Leaderboard</h3>
+      <div class="tabs">
+        <button data-tab="invites">Invites</button>
+        <button data-tab="mints" class="off">Mints</button>
+        <button data-tab="holders" class="off">Holders</button>
+      </div>
+      <table>
+        <thead><tr><th>#</th><th>Agent ID</th><th id="lbMetric">Invites</th></tr></thead>
+        <tbody id="lbBody">
+          <tr><td colspan="3" class="note">Loading… (leaderboard activates on mainnet launch)</td></tr>
+        </tbody>
+      </table>
+      <h3 style="margin-top:22px">How it rolls</h3>
+      <div class="row"><span>Base quota</span><b>10 shares / Agent ID</b></div>
+      <div class="row"><span>Invite bonus</span><b>+1 share per invited first mint</b></div>
+      <div class="row"><span>Social tasks</span><b>+1 share per task</b></div>
+      <div class="row"><span>Funds split</span><b>80% pool · 20% treasury</b></div>
+      <div class="row"><span>Pool opens</span><b>at 10,000 shares · LP → dead address</b></div>
+    </section>
+  </div>
+
+  <!-- Tier table -->
+  <section class="card" style="margin-top:18px">
+    <h3>Tiered pricing · 353 tiers · max 8.07× start</h3>
+    <table>
+      <thead><tr><th>Tier</th><th>Shares</th><th>Price / share</th><th></th></tr></thead>
+      <tbody id="tierBody"></tbody>
+    </table>
+    <p class="note">After share 10,000 the pool is open; per-share token allocation in this v1 test
+       stays fixed at 500,000 SNOWBALL (live design may float it with pool price).</p>
+  </section>
+</main>
+
+<footer>
+  $SNOWBALL — TEST VERSION. Contracts are unaudited test builds: fixed 500,000/share allocation,
+  operator-credited task quota, placeholder card grading. Mainnet launch requires audit + Olivia's
+  explicit deployment approval.<br>
+  <span class="mono" id="addrLine">contracts: not deployed yet (see snowball/README.md)</span>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
+<script>
+/* ===== Config: paste BSC-testnet addresses after running scripts/deploy-testnet.js ===== */
+const CONFIG = {
+  chainId: 97,
+  rpc: "https://data-seed-prebsc-1-s1.binance.org:8545",
+  mint: "",      // SnowballMint (testnet) — empty = static preview mode
+  token: "",     // SnowballToken (testnet)
+  card: "",      // SnowballCard (testnet)
+  registry: ""   // MockAgentRegistry (testnet)
+};
+const START_PRICE = 0.002, TOTAL_SHARES = 4440000, POOL_OPEN = 10000;
+const MINT_ABI = [
+  "function totalSharesSold() view returns (uint256)",
+  "function poolReserve() view returns (uint256)",
+  "function poolOpened() view returns (bool)",
+  "function priceForShare(uint256) view returns (uint256)",
+  "function costForShares(uint256,uint256) view returns (uint256)",
+  "function quotaOf(uint256) view returns (uint256)",
+  "function mintedByIdentity(uint256) view returns (uint256)",
+  "function identityOf(string) pure returns (uint256)",
+  "function mint(uint256,string,string) payable"
+];
+
+/* Tier price in BNB for a 0-based share index — mirrors SnowballMint exactly. */
+function priceForIndex(i){
+  let step;
+  if (i < 10000) step = 0; else step = 1 + Math.floor((i - 10000) / 1000);
+  let m;
+  if (step === 0) m = 1000;
+  else if (step <= 10) m = 1000 + step * 100;
+  else { m = 2120 + (step - 11) * 20; if (m > 8070) m = 8070; }
+  return START_PRICE * m / 1000;
+}
+function fmt(n, d){ return n.toLocaleString("en-US", {maximumFractionDigits: d ?? 4}); }
+
+/* Tier table: first 13 rows + cap row */
+(function(){
+  const rows = [];
+  rows.push([1, "0 – 10,000", priceForIndex(0), "Current at launch"]);
+  for (let t = 2; t <= 12; t++){
+    const start = 10000 + (t - 2) * 1000 + (t === 2 ? 1 : 1);
+    const lo = 10000 + (t - 2) * 1000, hi = lo + 999;
+    rows.push([t, (lo + 1).toLocaleString() + " – " + (hi + 1).toLocaleString(), priceForIndex(lo), ""]);
+  }
+  rows.push(["…", "…", "…", ""]);
+  rows.push([353, "up to 4,440,000", priceForIndex(4439999), "Cap 8.07×"]);
+  document.getElementById("tierBody").innerHTML = rows.map(r =>
+    `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${fmt(r[2], 5)} BNB</td><td class="note">${r[3] || ""}</td></tr>`).join("");
+})();
+
+/* Leaderboard tabs (placeholder data in preview) */
+const LB = { invites: "Invites", mints: "Mints", holders: "Shares" };
+document.querySelectorAll(".tabs button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll(".tabs button").forEach(x => x.classList.add("off"));
+  b.classList.remove("off");
+  document.getElementById("lbMetric").textContent = LB[b.dataset.tab];
+  document.getElementById("lbBody").innerHTML =
+    `<tr><td colspan="3" class="note">Loading… (${b.dataset.tab} board activates on mainnet launch)</td></tr>`;
+}));
+
+/* ===== Live wiring (only when CONFIG.mint is set and ethers loaded) ===== */
+const $ = id => document.getElementById(id);
+let provider = null, signer = null, mint = null;
+
+async function refreshStatic(){
+  // No contract wired: show launch-state values.
+  $("soldNow").textContent = "0";
+  $("serialNow").textContent = "#1";
+  $("tierNow").textContent = "Tier 1 · 0.002 BNB";
+  $("poolPct").textContent = "0%";
+  $("reserveNow").textContent = "0 BNB";
+  updateCost(0);
+}
+function updateCost(sold){
+  const n = Math.max(1, parseInt($("shares").value || "1", 10));
+  let cost = 0; for (let k = 0; k < n; k++) cost += priceForIndex(sold + k);
+  $("costNow").textContent = fmt(cost, 5) + " BNB";
+}
+$("shares").addEventListener("input", () => updateCost(window.__sold || 0));
+
+async function refreshLive(){
+  const sold = Number(await mint.totalSharesSold());
+  window.__sold = sold;
+  const price = Number(ethers.formatEther(await mint.priceForShare(sold)));
+  const step = sold < 10000 ? 1 : 2 + Math.floor((sold - 10000) / 1000);
+  $("soldNow").textContent = sold.toLocaleString();
+  $("serialNow").textContent = "#" + (sold + 1).toLocaleString();
+  $("tierNow").textContent = "Tier " + step + " · " + fmt(price, 5) + " BNB";
+  $("soldBar").style.width = Math.min(100, sold / TOTAL_SHARES * 100) + "%";
+  $("poolPct").textContent = Math.min(100, sold / POOL_OPEN * 100).toFixed(1) + "%";
+  $("reserveNow").textContent = fmt(Number(ethers.formatEther(await mint.poolReserve())), 4) + " BNB";
+  updateCost(sold);
+  await refreshQuota();
+}
+async function refreshQuota(){
+  const h = $("handle").value.trim();
+  if (!h || !mint) return;
+  try {
+    const id = await mint.identityOf(h);
+    const minted = await mint.mintedByIdentity(id);
+    const quota = await mint.quotaOf(id);
+    $("quotaNow").textContent = minted.toString() + " / " + quota.toString();
+  } catch(e) { $("quotaNow").textContent = "—"; }
+}
+$("handle").addEventListener("change", refreshQuota);
+
+$("connectBtn").addEventListener("click", async () => {
+  if (!CONFIG.mint) { $("statusLine").textContent = "Static preview: no testnet contract wired yet — see README for deploy steps."; return; }
+  if (!window.ethereum) { $("statusLine").textContent = "No wallet provider found in this browser."; return; }
+  provider = new ethers.BrowserProvider(window.ethereum);
+  signer = await provider.getSigner();
+  mint = new ethers.Contract(CONFIG.mint, MINT_ABI, signer);
+  $("connectBtn").textContent = "Connected: " + (await signer.getAddress()).slice(0, 10) + "…";
+  $("mintBtn").disabled = false;
+  $("addrLine").textContent = "mint: " + CONFIG.mint + " · token: " + CONFIG.token + " · card: " + CONFIG.card;
+  await refreshLive();
+});
+
+$("mintBtn").addEventListener("click", async () => {
+  if (!mint) return;
+  const h = $("handle").value.trim(), ref = $("referrer").value.trim();
+  const n = Math.max(1, parseInt($("shares").value || "1", 10));
+  if (!h) { $("statusLine").textContent = "Enter your Agent ID handle first."; return; }
+  try {
+    const sold = await mint.totalSharesSold();
+    const cost = await mint.costForShares(sold, n);
+    $("statusLine").textContent = "Sending mint transaction…";
+    const tx = await mint.mint(n, h, ref, { value: cost });
+    await tx.wait();
+    $("statusLine").textContent = "Minted " + n + " share(s). Tx: " + tx.hash;
+    await refreshLive();
+  } catch(e) {
+    $("statusLine").textContent = "Mint failed: " + (e.shortMessage || e.message || e);
+  }
+});
+
+if (CONFIG.mint && window.ethers) {
+  provider = new ethers.JsonRpcProvider(CONFIG.rpc, CONFIG.chainId);
+  mint = new ethers.Contract(CONFIG.mint, MINT_ABI, provider);
+  $("addrLine").textContent = "mint: " + CONFIG.mint + " · token: " + CONFIG.token + " · card: " + CONFIG.card;
+  refreshLive().catch(() => refreshStatic());
+} else {
+  refreshStatic();
+}
+</script>
+</body>
+</html>
